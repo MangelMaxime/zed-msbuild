@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <!-- Just a comment -->
+    <OutputPath Condition="'$(Configuration)' == 'Debug'">bin\Debug\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <Compile Remove="Legacy/**/*.cs" />
+  </ItemGroup>
+
+  <Target Name="CustomTarget" AfterTargets="Build">
+    <Message Text="Building $(AssemblyName) for %(Configuration)" Importance="high" />
+  </Target>
+
+</Project>

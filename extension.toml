@@ -1,0 +1,12 @@
+id = "msbuild"
+name = "MSBuild"
+description = "MSBuild support for project files (.csproj, .fsproj, .vbproj, .props, .targets, ...)."
+version = "0.1.0"
+schema_version = 1
+authors = ["Maxime Mangel"]
+repository = "https://github.com/MangelMaxime/zed-msbuild"
+
+[grammars.xml]
+repository = "https://github.com/tree-sitter-grammars/tree-sitter-xml"
+commit = "863dbc381f44f6c136a399e684383b977bb2beaa"
+path = "xml"
