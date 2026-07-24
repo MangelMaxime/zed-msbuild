@@ -2,3 +2,7 @@
 grammars/
 target/
 *.wasm
+
+# .NET build output (test/sample project)
+bin/
+obj/

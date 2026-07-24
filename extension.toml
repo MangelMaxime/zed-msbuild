@@ -10,3 +10,7 @@ repository = "https://github.com/MangelMaxime/zed-msbuild"
 repository = "https://github.com/tree-sitter-grammars/tree-sitter-xml"
 commit = "863dbc381f44f6c136a399e684383b977bb2beaa"
 path = "xml"
+
+[language_servers.msbuild-project-tools]
+name = "MSBuild Project Tools"
+language = "MSBuild"

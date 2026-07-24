@@ -9,6 +9,14 @@ MSBuild project files are well-formed XML, so this extension reuses the
 [tree-sitter-xml](https://github.com/tree-sitter-grammars/tree-sitter-xml) grammar
 rather than shipping a custom parser.
 
+## Language server
+
+IntelliSense (completions, diagnostics, hover) is powered by
+[msbuild-project-tools-server](https://github.com/tintoy/msbuild-project-tools-server). The
+extension downloads it automatically on first use.
+
+It requires the **.NET SDK (8.0+)** to be installed and available as `dotnet` on `PATH`.
+
 ## Developing locally
 
 1. Open Zed.
@@ -18,3 +26,7 @@ rather than shipping a custom parser.
 ## Tree-Sitter
 
 - https://github.com/tree-sitter-grammars/tree-sitter-xml
+
+## Language Server
+
+- https://github.com/tintoy/msbuild-project-tools-server
