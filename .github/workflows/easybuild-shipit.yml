@@ -1,0 +1,74 @@
+name: EasyBuild ShipIt
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  # On every push to main, ShipIt looks at the conventional commits since the last
+  # release and opens (or updates) a "chore: release X.Y.Z" pull request that bumps
+  # the changelog and extension.toml. Merging that PR triggers the `release` job below.
+  shipit-pr:
+    name: ShipIt - Prepare release PR
+    runs-on: ubuntu-latest
+    # The release commit is handled by the `release` job, so skip it here.
+    if: "${{ !startsWith(github.event.head_commit.message, 'chore: release ') }}"
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          # Full history is required to compute the changelog from the commit log.
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          # ShipIt targets net10.0; CommitLinter (net6.0) runs on the same runtime.
+          dotnet-version: '10.0.x'
+
+      - name: Restore .NET tools
+        run: dotnet tool restore
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-wasip2
+
+      # Build gate: don't cut a release PR if the extension doesn't compile.
+      - name: Build extension
+        run: cargo build --release --target wasm32-wasip2
+
+      - name: ShipIt (create/update release PR)
+        run: dotnet shipit
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # When the "chore: release X.Y.Z" PR is merged, tag the commit and publish a
+  # GitHub release. The tag is what the Zed extension registry references.
+  release:
+    name: Tag & GitHub release
+    runs-on: ubuntu-latest
+    if: "${{ startsWith(github.event.head_commit.message, 'chore: release ') }}"
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Read version from extension.toml
+        id: version
+        run: |
+          version=$(grep -m1 '^version = ' extension.toml | sed -E 's/^version = "(.*)"/\1/')
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Create tag and GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          version="${{ steps.version.outputs.version }}"
+          gh release create "v$version" \
+            --title "v$version" \
+            --generate-notes
