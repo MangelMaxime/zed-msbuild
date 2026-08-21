@@ -13,4 +13,4 @@ path = "xml"
 
 [language_servers.msbuild-project-tools]
 name = "MSBuild Project Tools"
-language = "MSBuild"
+languages = ["MSBuild"]

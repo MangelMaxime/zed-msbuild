@@ -1,3 +1,9 @@
+;; Copied verbatim from tree-sitter-xml (queries/xml/highlights.scm).
+;; https://github.com/tree-sitter-grammars/tree-sitter-xml
+;;
+;; Copyright (c) 2023 ObserverOfTime
+;; Licensed under the MIT License; see the upstream repository for the full text.
+
 ;; XML declaration
 
 "xml" @keyword
