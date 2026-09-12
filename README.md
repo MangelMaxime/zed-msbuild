@@ -41,27 +41,13 @@ Accepted commit types: `feat`, `fix`, `ci`, `chore`, `docs`, `test`, `style`,
 
 ## Releases
 
-Releases are automated with
-[EasyBuild.ShipIt](https://github.com/easybuild-org/EasyBuild.ShipIt) via the
-`EasyBuild ShipIt` GitHub Actions workflow:
+Releases are managed by
+[EasyBuild.ShipIt](https://github.com/easybuild-org/EasyBuild.ShipIt).
 
-1. On every push to `main`, ShipIt opens (or updates) a `chore: release X.Y.Z`
-   pull request that bumps `CHANGELOG.md` and the `version` in `extension.toml`
-   based on the conventional commits since the last release.
-2. Merging that PR tags the commit (`vX.Y.Z`) and publishes a GitHub release.
-3. Submitting/updating the extension in the
-   [Zed extension registry](https://github.com/zed-industries/extensions) remains
-   a manual step that references the new tag.
-
-Repository settings required for the automation:
-
-- **Settings → Actions → General:** enable *Allow GitHub Actions to create and
-  approve pull requests*.
-- **Settings → General → Pull Requests:** prefer *Squash merging* set to use the
-  *pull request title*, so the release history stays clean for ShipIt.
-
-Releases run in CI on the .NET 10 SDK (ShipIt targets `net10.0`); day-to-day
-contributing only needs a .NET SDK recent enough to run the commit-msg hook.
+1. ShipIt opens a `chore: release X.Y.Z` pull request when `main` has unreleased changes.
+2. Merge it to tag `vX.Y.Z` and publish the GitHub release.
+3. Update the extension in the
+   [Zed extension registry](https://github.com/zed-industries/extensions) to the new tag.
 
 ## Tree-Sitter
 
