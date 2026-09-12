@@ -39,16 +39,6 @@ dotnet husky install
 Accepted commit types: `feat`, `fix`, `ci`, `chore`, `docs`, `test`, `style`,
 `refactor`, `perf`, `revert`, `build`.
 
-## Releases
-
-Releases are managed by
-[EasyBuild.ShipIt](https://github.com/easybuild-org/EasyBuild.ShipIt).
-
-1. ShipIt opens a `chore: release X.Y.Z` pull request when `main` has unreleased changes.
-2. Merge it to tag `vX.Y.Z` and publish the GitHub release.
-3. Update the extension in the
-   [Zed extension registry](https://github.com/zed-industries/extensions) to the new tag.
-
 ## Tree-Sitter
 
 - https://github.com/tree-sitter-grammars/tree-sitter-xml
