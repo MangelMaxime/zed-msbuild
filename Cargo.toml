@@ -1,5 +1,5 @@
 [package]
-name = "zed_msbuild"
+name = "msbuild_lsp"
 version = "0.1.0"
 edition = "2021"
 publish = false

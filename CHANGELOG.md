@@ -1,17 +1,8 @@
 ---
-# If you are adopting EasyBuild.ShipIt from an existing project, it is recommended to fill in the hash
-# of the last commit released below
-# last_commit_released: ...
-#
-# Learn more about configuration at
-# https://github.com/easybuild-org/EasyBuild.ShipIt#configuration
-
-# On each release, keep the version in extension.toml (the one Zed publishes) in sync
-# with the version ShipIt computes from the conventional commits.
 updaters:
   - regex:
       file: extension.toml
-      pattern: '(?<=version = ")[^"]*(?=")'
+      pattern: (?<=version = ")[^"]*(?=")
 ---
 
 # Changelog
